@@ -1,0 +1,8 @@
+scikit-learn
+numpy
+pandas
+joblib
+# Development requirements
+flake8
+flake8-black
+nose

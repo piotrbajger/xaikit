@@ -19,7 +19,11 @@ jobs:
       - name: Install Python development packages
         run: |
           python -m pip install --upgrade pip
-          python -m pip install setuptools wheel flake8 flake8-black nose
+          python -m pip install setuptools wheel
+
+      - name: Install requirements
+        run: |
+          python -m pip install -r requirements.txt
 
       - name: Run flake8
         run: |
