@@ -13,7 +13,7 @@ class TestCeterisParibus(TestCase):
         ran = np.random.RandomState(42)
         x = ran.random((100, 2))
 
-        class MockEstimator():
+        class MockEstimator:
             def predict(self, x):
                 return x[:, 0] + 2 * x[:, 1]
 

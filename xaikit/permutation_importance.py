@@ -57,15 +57,16 @@ def permutation_importance(
         permutation performance is to be computed.
     :param y array-like, shape (n_samples, ) or (n_samples, n_classes): Targets in case
         of a supervised estimator.
-    :param feature_groups dict of lists or None: If features are to be bundled together, this
-        provides a mapping between group names and features. The keys are the group names,
-        while the values are lists of ints (feature indices) or strings (column names in case
-        x is a DataFrame). Features which do not fall into any group are assumed to form
-        a one-feature group.
+    :param feature_groups dict of lists or None: If features are to be bundled
+        together, this provides a mapping between group names and features. The keys
+        are the group names, while the values are lists of ints (feature indices)
+        or strings (column names in case x is a DataFrame). Features which do not
+        fall into any group are assumed to form a one-feature group.
     :param scoring string, callable or None: Scorer to use.
     :param n_repeats int, default=5: Number of times to permute each feature.
-    :param n_jobs int or None, default=None: The number of jobs to use for the computation.
-        If None, a single job is used. If -1, all available processors are used.
+    :param n_jobs int or None, default=None: The number of jobs to use
+        for the computation. If None, a single job is used. If -1, all available
+        processors are used.
     :param random_state int, RandomState instance, default=None: Pseudo-random number
         generator to control the permutations or sampling of each feature.
     """

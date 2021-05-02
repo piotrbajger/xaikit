@@ -56,7 +56,6 @@ class TestPermutationImportance(TestCase):
             feature_groups={"Imp": [0], "Rest": [1, 2, 3, 4]},
         )
         means = result["importances_mean"]
-        groups = result["groups"]
 
         self.assertTrue(means.shape == (2,))
         self.assertTrue(np.argmax(means) == 0)

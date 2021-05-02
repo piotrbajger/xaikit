@@ -1,6 +1,6 @@
 import numpy as np
 
-from sklearn.utils import Bunch, check_random_state, check_array
+from sklearn.utils import Bunch, check_array
 
 
 def ceteris_paribus(estimator, x, feature, values, relative=False):
