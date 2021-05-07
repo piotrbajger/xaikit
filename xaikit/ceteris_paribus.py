@@ -2,6 +2,8 @@ import numpy as np
 
 from sklearn.utils import Bunch, check_array
 
+from xaikit import utils
+
 
 def ceteris_paribus(estimator, x, feature, values, relative=False):
     """
@@ -26,10 +28,7 @@ def ceteris_paribus(estimator, x, feature, values, relative=False):
     if not hasattr(x, "iloc"):
         x = check_array(x.reshape(1, -1), force_all_finite="allow-nan", dtype=None)
 
-    if hasattr(estimator, "predict_proba"):
-        predict = estimator.predict_proba
-    else:
-        predict = estimator.predict
+    predict = utils.get_predictor(estimator)
 
     if isinstance(feature, str) and hasattr(x, "columns"):
         feature = list(x.columns).index(feature)

@@ -31,3 +31,25 @@ class TestCeterisParibus(TestCase):
 
         # Fix both variables (=> prediction for x0)
         self.assertEqual(result["breakdown"][2], 2.5)
+
+    def test_breakdown_features(self):
+        """Test breakdown feature selection"""
+        ran = np.random.RandomState(42)
+        x = ran.random((100, 4))
+
+        class MockEstimator:
+            def predict(self, x):
+                return x @ np.array([1, 2, -4, 1])
+
+        est = MockEstimator()
+
+        result = breakdown(est, x, x0=np.array([0.5, 1.0, 0.2, -0.5]), features=[0, 2])
+
+        # Compute mean prediction
+        base_y = np.mean(est.predict(x), axis=0)
+        self.assertEqual(result["breakdown"][0], base_y)
+
+        # Last entry is the prediction for x0
+        self.assertEqual(result["breakdown"][-1], 1.2)
+
+        self.assertEqual(len(result["breakdown"]), 4)
