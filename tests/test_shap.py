@@ -1,4 +1,3 @@
-from sklearn.ensemble import RandomForestRegressor
 from unittest import TestCase
 
 import numpy as np
