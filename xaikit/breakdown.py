@@ -19,39 +19,38 @@ def breakdown(estimator, x, x0, features=None):
     """
     predict = utils.get_predictor(estimator)
 
-    x0 = x0.reshape(1, -1)
+    x0 = utils.ensure_2d_array(x0)
     n_vars = x0.shape[-1]
 
-    # If no features provided, default to the full list
     if features is None:
         features = list(range(n_vars))
+    all_features = utils.append_missing_features(features, n_features=n_vars)
 
-    # Check if any features are to be bundled together as the "remaining features"
-    all_features = list(range(n_vars))
-    remaining_features = [f for f in all_features if f not in features]
-
-    n_features = len(features) + int(len(remaining_features) > 0)
-    result = np.zeros(n_features + 1)
-
+    new_x = utils.get_values(x).copy()
     base_y = np.mean(predict(x), axis=0)
-    new_x = x.copy()
-
-    result[0] = base_y
-
-    for i in features:
-        new_x[:, i] = x0[:, i]
-        next_y = np.mean(predict(new_x), axis=0)
-        result[i + 1] = next_y
-
-    if len(remaining_features) > 0:
-        new_x[:, remaining_features] = x0[:, remaining_features]
-        next_y = np.mean(predict(new_x))
-        result[-1] = next_y
+    target_y = predict(x0)
+    contributions = contributions_along_path(predict, new_x, x0, all_features)
 
     return Bunch(
-        breakdown=result,
+        breakdown=contributions,
         features=features,
-        base_prediction=result[0],
-        target_prediction=result[-1],
-        remaining_features=remaining_features,
+        base_prediction=base_y,
+        target_prediction=target_y,
     )
+
+
+def contributions_along_path(predict, x, x0, feature_path):
+    """
+    Implementation of the breakdown logic. Separated so that it can be
+    re-used in SHAP calculations.
+    """
+    base_y = np.mean(predict(x), axis=0)
+    yhats = [base_y]
+
+    for feature in feature_path:
+        x[:, feature] = x0[:, feature]
+        next_y = np.mean(predict(x), axis=0)
+        yhats.append(next_y)
+
+    contributions = np.diff(yhats, axis=0)
+    return contributions
