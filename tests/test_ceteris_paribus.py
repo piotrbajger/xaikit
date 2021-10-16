@@ -2,9 +2,10 @@ from unittest import TestCase
 
 import numpy as np
 
-from xaikit.ceteris_paribus import ceteris_paribus
-
 from sklearn.linear_model import LinearRegression
+
+from xaikit.ceteris_paribus import ceteris_paribus
+from xaikit.adapters import create_model_adapter
 
 
 class TestCeterisParibus(TestCase):
@@ -16,11 +17,13 @@ class TestCeterisParibus(TestCase):
         x = ran.random((100, 2))
         y = x[:, 0] + 2 * x[:, 1]
 
-        est = LinearRegression()
-        est.fit(x, y)
+        model = LinearRegression()
+        model.fit(x, y)
+
+        xaikit_model = create_model_adapter(model)
 
         result = ceteris_paribus(
-            est, [0.0, 1.0], feature=0, values=[-1, -0.5, 0, 0.5, 1]
+            xaikit_model, [0.0, 1.0], feature=0, values=[-1, -0.5, 0, 0.5, 1]
         )
 
         cp = result["ceteris_paribus"]

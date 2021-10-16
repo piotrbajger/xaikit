@@ -3,6 +3,7 @@ from unittest import TestCase
 import numpy as np
 
 from xaikit.breakdown import breakdown
+from xaikit.adapters.adapter_interface import ModelAdapterInterface
 
 
 class TestCeterisParibus(TestCase):
@@ -13,7 +14,7 @@ class TestCeterisParibus(TestCase):
         x = ran.random((100, 4))
         weights = np.array([1, 2, -0.5, 0.25])
 
-        class MockEstimator:
+        class MockEstimator(ModelAdapterInterface):
             def predict(self, x):
                 return x @ weights
 
@@ -32,7 +33,7 @@ class TestCeterisParibus(TestCase):
         x = ran.random((100, 4))
         weights = np.array([1, 2, -0.5, 0.25])
 
-        class MockEstimator:
+        class MockEstimator(ModelAdapterInterface):
             def predict(self, x):
                 return x @ weights
 

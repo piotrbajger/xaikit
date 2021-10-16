@@ -2,6 +2,7 @@ from unittest import TestCase
 
 import numpy as np
 
+from xaikit.adapters.adapter_interface import ModelAdapterInterface
 from xaikit.shap import shap
 
 
@@ -13,7 +14,7 @@ class TestShap(TestCase):
         x = ran.random((100, 4))
         weights = np.array([1, 2, -0.5, 0.25])
 
-        class MockEstimator:
+        class MockEstimator(ModelAdapterInterface):
             def predict(self, x):
                 return x @ weights
 
@@ -36,7 +37,7 @@ class TestShap(TestCase):
         x = ran.random((100, 4))
         weights = np.array([1, 2, -0.5, 0.25])
 
-        class MockEstimator:
+        class MockEstimator(ModelAdapterInterface):
             def predict(self, x):
                 return x @ weights - 0.5 * x[:, 1] * x[:, 3]
 
