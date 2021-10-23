@@ -1,8 +1,6 @@
 import numpy as np
 import numpy.random
 
-from sklearn.utils import Bunch
-
 from xaikit import utils
 from xaikit import breakdown
 
@@ -49,7 +47,7 @@ def shap(estimator, x, x0, features=None, n_permutations=10, seed=42):
         )
         contributions[i, feature_path] = permuted_contributions
 
-    return Bunch(
+    return dict(
         contributions=contributions,
         shap_values_mean=contributions.mean(axis=0),
         shap_values_std=contributions.std(axis=0),

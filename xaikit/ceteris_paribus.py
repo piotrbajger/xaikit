@@ -1,6 +1,6 @@
 import numpy as np
 
-from sklearn.utils import Bunch, check_array
+from sklearn.utils import check_array
 
 from xaikit import utils
 
@@ -44,4 +44,4 @@ def ceteris_paribus(estimator, x, feature, values, relative=False):
     if relative:
         y -= base_y
 
-    return Bunch(ceteris_paribus=y, base_prediction=base_y)
+    return dict(ceteris_paribus=y, base_prediction=base_y)

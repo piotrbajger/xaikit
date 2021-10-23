@@ -1,7 +1,5 @@
 import numpy as np
 
-from sklearn.utils import Bunch
-
 from xaikit import utils
 
 
@@ -31,7 +29,7 @@ def breakdown(estimator, x, x0, features=None):
     target_y = predict(x0)
     contributions = contributions_along_path(predict, new_x, x0, all_features)
 
-    return Bunch(
+    return dict(
         breakdown=contributions,
         features=features,
         base_prediction=base_y,
