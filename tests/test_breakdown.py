@@ -2,7 +2,7 @@ from unittest import TestCase
 
 import numpy as np
 
-from xaikit.breakdown import breakdown
+from xaikit.explainers.breakdown import breakdown
 from xaikit.adapters.adapter_interface import ModelAdapterInterface
 
 

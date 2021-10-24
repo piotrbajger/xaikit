@@ -4,7 +4,7 @@ import numpy as np
 
 from sklearn.linear_model import LinearRegression
 
-from xaikit.ceteris_paribus import ceteris_paribus
+from xaikit.explainers.ceteris_paribus import ceteris_paribus
 from xaikit.adapters import create_model_adapter
 
 

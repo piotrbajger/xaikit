@@ -2,7 +2,7 @@ import numpy as np
 import numpy.random
 
 from xaikit import utils
-from xaikit import breakdown
+from xaikit.explainers import breakdown
 
 
 def shap(estimator, x, x0, features=None, n_permutations=10, seed=42):

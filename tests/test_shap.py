@@ -3,7 +3,7 @@ from unittest import TestCase
 import numpy as np
 
 from xaikit.adapters.adapter_interface import ModelAdapterInterface
-from xaikit.shap import shap
+from xaikit.explainers.shap import shap
 
 
 class TestShap(TestCase):
