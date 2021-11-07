@@ -1,0 +1,30 @@
+xaikit package
+==============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   xaikit.adapters
+   xaikit.explainers
+
+Submodules
+----------
+
+xaikit.utils module
+-------------------
+
+.. automodule:: xaikit.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: xaikit
+   :members:
+   :undoc-members:
+   :show-inheritance:

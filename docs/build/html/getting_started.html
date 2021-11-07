@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getting started &#8212; xaikit 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="xaikit" href="apidoc/modules.html" />
+    <link rel="prev" title="xaikit" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="getting-started">
+<span id="id1"></span><h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h2>
+<p>xaikit is meant to be your eXplainable AI toolkit which provides out-of-the-box
+model-agnostic lightweight tools to inspect your machine learning models.</p>
+<p>The majority of the algorithms and ideas are based on the fantastic book
+<a class="reference external" href="https://github.com/pbiecek/ema">Explanotary Model Analysis</a> by P. Biecek and T. Burzykowski.</p>
+</div>
+<div class="section" id="id2">
+<h2>Getting started<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>We will use the scikit-learn library and the Breast Cancer Wisconsin Dataset as our example.
+The problem is to classify breast masses as either malignant or benign based on a number
+of features extracted from medical images.</p>
+<p>First we load the dataset:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_breast_cancer</span>
+
+
+<span class="n">breast_cancer_dataset</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">breast_cancer_dataset</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">breast_cancer_dataset</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span>
+
+<span class="c1"># Use a subset of features for simplicity</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;mean&quot;</span><span class="p">)]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We then create a simple classifier. For the purpose of showcasting the xaikit module,
+we will use entire dataset (instead of splitting it into training and testing subsets).</p>
+<p>A simple logistic regression model easily achieves a 96% F1-score on this dataset.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">f1_score</span>
+
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">10_000</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">f1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1-score: </span><span class="si">{</span><span class="n">f1</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="observation-level-explainer">
+<h2>Observation-level explainer<a class="headerlink" href="#observation-level-explainer" title="Permalink to this headline">¶</a></h2>
+<p>Let us now consider a prediction for a single patient:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">patient_id</span> <span class="o">=</span> <span class="mi">22</span>
+<span class="n">proba_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">patient_x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">patient_id</span><span class="p">]</span>
+<span class="n">patient_y</span> <span class="o">=</span> <span class="n">proba_pred</span><span class="p">[</span><span class="n">patient_id</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prediction for </span><span class="si">{</span><span class="n">patient_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">patient_y</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Using the <a class="reference internal" href="apidoc/xaikit.explainers.html#xaikit.explainers.shap.shap" title="xaikit.explainers.shap.shap"><code class="xref py py-func docutils literal notranslate"><span class="pre">shap()</span></code></a>
+explainer from xaikit we can examine how each feature contributes
+to this prediction:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">xaikit.explainers.shap</span> <span class="kn">import</span> <span class="n">shap</span>
+
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">shap</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">patient_x</span><span class="p">)</span>
+<span class="n">shap_means</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;shap_values_mean&quot;</span><span class="p">]</span>
+
+<span class="c1"># Pretty print the results</span>
+<span class="n">data_to_print</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">patient_x</span><span class="p">,</span> <span class="n">shap_means</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;base&#39;</span><span class="si">:</span><span class="s2">&lt;30</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;base_prediction&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">36</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">feature_name</span><span class="p">,</span> <span class="n">feature_val</span><span class="p">,</span> <span class="n">shap_mean</span> <span class="ow">in</span> <span class="n">data_to_print</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">feature_name</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">feature_val</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">shap_mean</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">36</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;target&#39;</span><span class="si">:</span><span class="s2">&lt;30</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;target_prediction&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Which should result in the following output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">base</span>                                 <span class="mf">0.63</span>
+<span class="o">-----------------------------------------</span>
+<span class="n">mean</span> <span class="n">radius</span> <span class="o">=</span> <span class="mf">15.34</span>                 <span class="o">-</span><span class="mf">0.00</span>
+<span class="n">mean</span> <span class="n">texture</span> <span class="o">=</span> <span class="mf">14.26</span>                <span class="o">+</span><span class="mf">0.06</span>
+<span class="n">mean</span> <span class="n">perimeter</span> <span class="o">=</span> <span class="mf">102.50</span>             <span class="o">-</span><span class="mf">0.47</span>
+<span class="n">mean</span> <span class="n">area</span> <span class="o">=</span> <span class="mf">704.40</span>                  <span class="o">-</span><span class="mf">0.00</span>
+<span class="n">mean</span> <span class="n">smoothness</span> <span class="o">=</span> <span class="mf">0.11</span>              <span class="o">-</span><span class="mf">0.00</span>
+<span class="n">mean</span> <span class="n">compactness</span> <span class="o">=</span> <span class="mf">0.21</span>             <span class="o">-</span><span class="mf">0.01</span>
+<span class="n">mean</span> <span class="n">concavity</span> <span class="o">=</span> <span class="mf">0.21</span>               <span class="o">-</span><span class="mf">0.01</span>
+<span class="n">mean</span> <span class="n">concave</span> <span class="n">points</span> <span class="o">=</span> <span class="mf">0.10</span>          <span class="o">-</span><span class="mf">0.00</span>
+<span class="n">mean</span> <span class="n">symmetry</span> <span class="o">=</span> <span class="mf">0.25</span>                <span class="o">-</span><span class="mf">0.00</span>
+<span class="n">mean</span> <span class="n">fractal</span> <span class="n">dimension</span> <span class="o">=</span> <span class="mf">0.07</span>       <span class="o">-</span><span class="mf">0.00</span>
+<span class="o">-----------------------------------------</span>
+<span class="n">target</span>                               <span class="mf">0.19</span>
+</pre></div>
+</div>
+<p>From here we see that, for example, the patient’s tumour having
+a mean perimeter of 102.50mm results in a decrease of the
+probability of the tumour being malignant by 0.47. Similarly,
+having the mean texture of 14.26 increases the probability
+by 0.06.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Other observation-level explainers: <a class="reference internal" href="apidoc/xaikit.explainers.html#xaikit.explainers.breakdown.breakdown" title="xaikit.explainers.breakdown.breakdown"><code class="xref py py-func docutils literal notranslate"><span class="pre">breakdown()</span></code></a>,
+<a class="reference internal" href="apidoc/xaikit.explainers.html#xaikit.explainers.ceteris_paribus.ceteris_paribus" title="xaikit.explainers.ceteris_paribus.ceteris_paribus"><code class="xref py py-func docutils literal notranslate"><span class="pre">ceteris_paribus()</span></code></a>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">xaikit</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#observation-level-explainer">Observation-level explainer</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Module documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="apidoc/modules.html">xaikit</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">xaikit</a></li>
+      <li>Next: <a href="apidoc/modules.html" title="next chapter">xaikit</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Piotr Bajger.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/getting_started.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

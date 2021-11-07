@@ -1,0 +1,7 @@
+xaikit
+======
+
+.. toctree::
+   :maxdepth: 4
+
+   xaikit

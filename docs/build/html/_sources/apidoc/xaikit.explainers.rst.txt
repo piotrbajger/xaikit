@@ -1,0 +1,37 @@
+xaikit.explainers package
+=========================
+
+Submodules
+----------
+
+xaikit.explainers.breakdown module
+----------------------------------
+
+.. automodule:: xaikit.explainers.breakdown
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+xaikit.explainers.ceteris\_paribus module
+-----------------------------------------
+
+.. automodule:: xaikit.explainers.ceteris_paribus
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+xaikit.explainers.shap module
+-----------------------------
+
+.. automodule:: xaikit.explainers.shap
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: xaikit.explainers
+   :members:
+   :undoc-members:
+   :show-inheritance:

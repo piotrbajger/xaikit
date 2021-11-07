@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>xaikit.adapters package &#8212; xaikit 0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="xaikit package" href="xaikit.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="xaikit-adapters-package">
+<h1>xaikit.adapters package<a class="headerlink" href="#xaikit-adapters-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-xaikit.adapters.adapter_interface">
+<span id="xaikit-adapters-adapter-interface-module"></span><h2>xaikit.adapters.adapter_interface module<a class="headerlink" href="#module-xaikit.adapters.adapter_interface" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="xaikit.adapters.adapter_interface.ModelAdapterInterface">
+<em class="property">class </em><code class="sig-prename descclassname">xaikit.adapters.adapter_interface.</code><code class="sig-name descname">ModelAdapterInterface</code><a class="headerlink" href="#xaikit.adapters.adapter_interface.ModelAdapterInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Interface for Model adapters.</p>
+<p>The goal of this interface is to create a shared interface for models
+from different libraries (scikit-learn, keras, etc.). Models wrapped
+in this interface can then be used with the explaining methods.</p>
+<p>Should not be created directly, use <code class="xref py py-func docutils literal notranslate"><span class="pre">create_model_adapter()</span></code>
+factory instead.</p>
+<dl class="py method">
+<dt id="xaikit.adapters.adapter_interface.ModelAdapterInterface.predict">
+<em class="property">abstract </em><code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xaikit.adapters.adapter_interface.ModelAdapterInterface.predict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-xaikit.adapters.sklearn_adapter">
+<span id="xaikit-adapters-sklearn-adapter-module"></span><h2>xaikit.adapters.sklearn_adapter module<a class="headerlink" href="#module-xaikit.adapters.sklearn_adapter" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="xaikit.adapters.sklearn_adapter.SklearnModelAdapter">
+<em class="property">class </em><code class="sig-prename descclassname">xaikit.adapters.sklearn_adapter.</code><code class="sig-name descname">SklearnModelAdapter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sklearn_model</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xaikit.adapters.sklearn_adapter.SklearnModelAdapter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#xaikit.adapters.adapter_interface.ModelAdapterInterface" title="xaikit.adapters.adapter_interface.ModelAdapterInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">xaikit.adapters.adapter_interface.ModelAdapterInterface</span></code></a></p>
+<p>Adapter for scikit-learn models.</p>
+<dl class="py method">
+<dt id="xaikit.adapters.sklearn_adapter.SklearnModelAdapter.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xaikit.adapters.sklearn_adapter.SklearnModelAdapter.predict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-xaikit.adapters">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-xaikit.adapters" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="xaikit.adapters.create_model_adapter">
+<code class="sig-prename descclassname">xaikit.adapters.</code><code class="sig-name descname">create_model_adapter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">external_model</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xaikit.adapters.create_model_adapter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Brings an external model under the xAIkit interface.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">xaikit</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">xaikit</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="xaikit.html">xaikit package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">xaikit</a><ul>
+  <li><a href="xaikit.html">xaikit package</a><ul>
+      <li>Previous: <a href="xaikit.html" title="previous chapter">xaikit package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Piotr Bajger.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/apidoc/xaikit.adapters.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

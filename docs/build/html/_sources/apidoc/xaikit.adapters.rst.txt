@@ -1,0 +1,29 @@
+xaikit.adapters package
+=======================
+
+Submodules
+----------
+
+xaikit.adapters.adapter\_interface module
+-----------------------------------------
+
+.. automodule:: xaikit.adapters.adapter_interface
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+xaikit.adapters.sklearn\_adapter module
+---------------------------------------
+
+.. automodule:: xaikit.adapters.sklearn_adapter
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: xaikit.adapters
+   :members:
+   :undoc-members:
+   :show-inheritance:
