@@ -8,12 +8,17 @@ xaikit
 
 Your eXplainable AI toolkit!
 
+.. toctree::
+    :maxdepth: 2
+    :caption: Contents:
+
+    getting_started
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+    :maxdepth: 2
+    :caption: Module documentation:
 
-   apidoc/modules
+    apidoc/modules
 
 
 
