@@ -26,7 +26,7 @@ def breakdown(estimator, x, x0, features=None):
 
     new_x = utils.get_values(x).copy()
     base_y = np.mean(predict(x), axis=0)
-    target_y = predict(x0)
+    target_y = predict(x0)[0]
     contributions = contributions_along_path(predict, new_x, x0, all_features)
 
     return dict(

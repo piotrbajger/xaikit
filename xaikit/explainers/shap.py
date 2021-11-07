@@ -33,7 +33,7 @@ def shap(estimator, x, x0, features=None, n_permutations=10, seed=42):
     n_features = len(features)
 
     base_y = np.mean(predict(x), axis=0)
-    target_y = predict(x0)
+    target_y = predict(x0)[0]
     contributions = np.zeros((n_permutations, n_features))
 
     for i in range(n_permutations):
