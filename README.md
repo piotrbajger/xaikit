@@ -7,4 +7,12 @@ book by P. Biecek and T. Burzykowski.
 The aim of this project is to provide a set of well-documented XAI algorithms,
 together with a simple pipeline for model deployment and analytics.
 
-The package is very much work in progress.
+## Documentation
+
+[Documentation](https://piotrbajger.github.io/xaikit/)
+
+## Installation
+
+```
+pip install git+https://github.com/piotrbajger/xaikit
+```
