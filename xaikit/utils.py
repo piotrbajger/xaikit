@@ -10,7 +10,7 @@ def get_predictor(estimator):
     """
     # TODO: Handle non-scalar predictors (e.g. multiclass)
     if hasattr(estimator, "predict_proba"):
-        return lambda x: estimator.predict_proba(x)[:, -1]
+        return estimator.predict_proba
     else:
         return estimator.predict
 
