@@ -3,8 +3,6 @@ from unittest import TestCase
 import numpy as np
 
 from xaikit.explainers.breakdown import breakdown
-from xaikit.adapters.adapter_interface import ModelAdapterInterface
-
 
 from .utils import MockBinaryLinearClassifier, MockLinearRegressor
 
