@@ -5,7 +5,6 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 
 from xaikit.explainers.ceteris_paribus import ceteris_paribus
-from xaikit.adapters import create_model_adapter
 
 
 class TestCeterisParibus(TestCase):
@@ -20,10 +19,8 @@ class TestCeterisParibus(TestCase):
         model = LinearRegression()
         model.fit(x, y)
 
-        xaikit_model = create_model_adapter(model)
-
         result = ceteris_paribus(
-            xaikit_model, [0.0, 1.0], feature=0, values=[-1, -0.5, 0, 0.5, 1]
+            model, [0.0, 1.0], feature=0, values=[-1, -0.5, 0, 0.5, 1]
         )
 
         cp = result["ceteris_paribus"]
